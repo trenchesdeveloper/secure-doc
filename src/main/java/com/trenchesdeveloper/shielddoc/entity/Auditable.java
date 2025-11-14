@@ -1,6 +1,7 @@
 package com.trenchesdeveloper.shielddoc.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.trenchesdeveloper.shielddoc.domain.RequestContext;
 import com.trenchesdeveloper.shielddoc.exception.ApiException;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -45,7 +46,7 @@ public abstract class Auditable {
 
     @PrePersist
     public void prePersist() {
-        var userId = 1L; //TODO: get user id from security context
+        var userId = RequestContext.getUserId();
         if (userId == null) {
             throw new ApiException("Cannot persist entity without a valid user ID in request context");
         }
@@ -57,7 +58,7 @@ public abstract class Auditable {
 
     @PreUpdate
     public void preUpdate() {
-        var userId = 1L; //TODO: get user id from security context
+        var userId = RequestContext.getUserId();
         if (userId == null) {
             throw new ApiException("Cannot update entity without a valid user ID in request context");
         }
