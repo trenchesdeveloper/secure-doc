@@ -1,7 +1,7 @@
 package com.trenchesdeveloper.shielddoc.controller;
 
 import com.trenchesdeveloper.shielddoc.dtoRequest.UserRequest;
-import com.trenchesdeveloper.shielddoc.entity.User;
+import com.trenchesdeveloper.shielddoc.entity.UserEntity;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +15,10 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody @Valid UserRequest user) {
+    public ResponseEntity<UserEntity> register(@RequestBody @Valid UserRequest user) {
         // For demonstration purposes, we simply return the received user object.
         // In a real application, you would save the user to the database here.
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok();
     }
 
     @GetMapping("/verify/account")
@@ -29,9 +29,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody User user) {
+    public ResponseEntity<UserEntity> login(@RequestBody UserEntity userEntity) {
         // For demonstration purposes, we simply return the received user object.
         // In a real application, you would authenticate the user here.
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(userEntity);
     }
 }
